@@ -14,8 +14,8 @@
     "testing": false,
     "max_sequence_length": 100
   },
-  "train_data_path": "./data/train.csv",
-  "validation_data_path": "./data/test.csv",
+  "train_data_path": "C:\\Users\\jesse\\Documents\\Datago\\data\\tmp\\model\\train.csv",
+  "validation_data_path": "C:\\Users\\jesse\\Documents\\Datago\\data\\tmp\\model\\test.csv",
   "model": {
     "type": "text_classifier_fscore_focal_loss",
     "text_field_embedder": {
@@ -47,7 +47,7 @@
     "patience": 4,
     "shuffle": true,
     "validation_metric": "+accuracy",
-    "cuda_device": 0,
+    "cuda_device": -1,
     "learning_rate_scheduler": {
       "type": "reduce_on_plateau",
       "factor": 0.5,

@@ -1,3 +1,3 @@
-allennlp train examples/model_albert.json \
-  -s /home/hetao/Data/AllenNlpModel/test_double \
+allennlp train examples/model_cnn.json \
+  -s C:\\Users\\jesse\\Documents\\Datago\\tmp\\test2 \
    --include-package AllenFrame
