@@ -114,7 +114,7 @@ class JIEBASplitter(WordSplitter):
                  only_tokens: bool = True,
                  user_dict: str = None,
                  stop_words_path: str = None) -> None:
-        jieba.enable_parallel(4)
+        #jieba.enable_parallel(4)
         self._pos_tags = pos_tags  # 是否标注词性。
 
         if user_dict and os.path.exists(user_dict):
