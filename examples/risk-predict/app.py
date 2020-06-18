@@ -61,12 +61,11 @@ if __name__ == '__main__':
     import_submodules('AllenFrame')
 
     logging.info(f'实例化')
-    path = './model/i/model.tar.gz'
+    path = '~/workplace/news_risk/model/i/model.tar.gz'
     predictor = RiskPredictor(path)
-    predictor.add_predictor('企业经营相关', './model/i3/model.tar.gz')
-    predictor.add_predictor('产品质量相关', './model/i6/model.tar.gz')
+    predictor.add_predictor('企业经营相关', '~/workplace/news_risk/model/i3/model.tar.gz')
+    predictor.add_predictor('产品质量相关', '~/workplace/news_risk/model/i6/model.tar.gz')
 
     logging.info(f'创建app')
     app = make_app(predictor)
-
     app.run(host="0.0.0.0", port=8001)
