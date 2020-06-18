@@ -47,7 +47,7 @@ def make_app(predictor):
                 result['sec_label'].add(prediction['sec_label'])
         result['pri_label'] = list(result['pri_label'])
         result['sec_label'] = list(result['sec_label'])
-        logging.INFO(f'返回请求...一级标签：{"/".join(result["pri label"])},二级标签{"/".join(result["sec_label"])}')
+        logging.INFO(f'返回请求...一级标签：{"/".join(result["pri_label"])},二级标签{"/".join(result["sec_label"])}')
         return jsonify(result)
     return app
 
