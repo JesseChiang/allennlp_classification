@@ -2,6 +2,7 @@ from allennlp.models.archival import load_archive
 from allennlp.predictors import Predictor
 from allennlp.common.util import import_submodules
 import logging
+import json
 
 
 from flask import Flask, request, jsonify
@@ -36,8 +37,9 @@ def make_app(predictor):
 
     @app.route('/predict', methods=['POST'])
     def processing():
-        sentences = request.form.get('content').split('\n')
-        sentences.append(request.form.get('title'))
+        data = json.loads(request.get_data(as_text=True))
+        sentences = data.get('content', '').split('\n')
+        sentences.append(data.get('title', ''))
         result = {'pri_label': set(), 'sec_label': set()}
         for sentence in sentences:
             prediction = predictor.predict_json({'sentence': sentence})
