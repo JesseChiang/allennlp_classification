@@ -65,6 +65,7 @@ if __name__ == '__main__':
     predictor = RiskPredictor(path)
     predictor.add_predictor('企业经营相关', '~/workplace/news_risk/model/i3/model.tar.gz')
     predictor.add_predictor('产品质量相关', '~/workplace/news_risk/model/i6/model.tar.gz')
+    predictor.add_predictor('企业管理相关', '~/workplace/news_risk/model/i4/model.tar.gz')
 
     logging.info(f'创建app')
     app = make_app(predictor)
