@@ -23,9 +23,7 @@ class RiskPredictor(object):
     def predict_json(self, json_data):
         # logging.info(f'预测')
         pri_prediction = self._pri_predictor.predict_json(json_data)
-        print(pri_prediction)
         sec_predictor = self._sec_predictors.get(pri_prediction['label'], None)
-        print(sec_predictor)
         sec_prediction = sec_predictor.predict_json(json_data) if sec_predictor else {'label': '', 'probs': [0]}
         return {'pri_label': pri_prediction['label'],
                 'pri_prob': max(pri_prediction['probs']),
@@ -49,6 +47,7 @@ def make_app(predictor):
                 result['sec_label'].add(prediction['sec_label'])
         result['pri_label'] = list(result['pri_label'])
         result['sec_label'] = list(result['sec_label'])
+        logging.INFO(f'返回请求...一级标签：{result["pri label"]},二级标签{result["sec_label"]}')
         return jsonify(result)
     return app
 
@@ -56,17 +55,17 @@ def make_app(predictor):
 if __name__ == '__main__':
     logging.basicConfig(format="%(asctime)s %(name)s:%(levelname)s:%(message)s",
                         datefmt='%Y-%m-%d %H:%M:%S',
-                        level=logging.WARNING)
+                        level=logging.INFO)
 
     import_submodules('AllenFrame')
 
-    logging.info(f'实例化')
+    logging.info(f'实例化...')
     path = '~/workplace/news_risk/model/i/model.tar.gz'
     predictor = RiskPredictor(path)
     predictor.add_predictor('企业经营相关', '~/workplace/news_risk/model/i3/model.tar.gz')
     predictor.add_predictor('产品质量相关', '~/workplace/news_risk/model/i6/model.tar.gz')
     predictor.add_predictor('企业管理相关', '~/workplace/news_risk/model/i4/model.tar.gz')
 
-    logging.info(f'创建app')
+    logging.info(f'创建app...')
     app = make_app(predictor)
     app.run(host="0.0.0.0", port=8001)
