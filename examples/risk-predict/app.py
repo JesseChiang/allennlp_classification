@@ -42,11 +42,16 @@ def make_app(predictor):
         sentences.append(data.get('title', ''))
         result = {'pri_label': set(), 'sec_label': set()}
         for sentence in sentences:
-            prediction = predictor.predict_json({'sentence': sentence})
-            result['pri_label'].add(prediction['pri_label'])
-            sec_label = prediction['sec_label']
-            if sec_label != '':
-                result['sec_label'].add(prediction['sec_label'])
+            if len(sentence) <= 4:
+                continue
+            try:
+                prediction = predictor.predict_json({'sentence': sentence})
+                result['pri_label'].add(prediction['pri_label'])
+                sec_label = prediction['sec_label']
+                if sec_label != '':
+                    result['sec_label'].add(prediction['sec_label'])
+            except:
+                continue
         result['pri_label'] = list(result['pri_label'])
         result['sec_label'] = list(result['sec_label'])
         logging.info(f"返回请求...一级标签：{'/'.join(result['pri_label'])}，二级标签：{'/'.join(result['sec_label'])}")
